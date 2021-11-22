@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "tell_tale",
+    "slug": "tell_tale",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "tell_tale"
+}
