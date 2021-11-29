@@ -14,16 +14,15 @@ function fetchData() {
       image: 'https://picsum.photos/id/1/200',
       chapters: [
         {
-          key: 1,
+          key: '1',
           name: 'teste',
           content: '',
         },
         {
-          key: 2,
+          key: '2',
           name: 'teste1',
           content: '',
         },
-
       ]
     },
     {
@@ -55,9 +54,10 @@ export default function Home() {
         </View>
       </View>
 
-      {/* <View style={styles.contentNew}>
+      <View style={styles.contentNew}>
+        <View style={styles.ball} />
         <Text style={styles.titleSection}> Novos </Text>
-      </View> */}
+      </View>
 
       <FlatList data={fetchData()}
         renderItem={({ item }) => (
@@ -65,6 +65,17 @@ export default function Home() {
         )}
         horizontal
         showsHorizontalScrollIndicator={false} />
+
+      {/* <View style={styles.contentNew}>
+        <Text style={styles.titleSection}> Todos </Text>
+      </View>
+
+      <FlatList data={fetchData()}
+        renderItem={({ item }) => (
+          <News tale={item} />
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false} /> */}
     </ScrollView>
    </View>
   );
@@ -97,10 +108,17 @@ const styles = StyleSheet.create({
   contentNew: {
     flexDirection: 'row',
     width: '100%',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   titleSection: {
     paddingHorizontal: 15,
     fontSize: 16,
+  },
+  ball: {
+    height: 6,
+    width: 6,
+    borderRadius: 10,
+    backgroundColor: '#f00',
+    marginLeft: 16,
   }
 });

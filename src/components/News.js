@@ -28,6 +28,7 @@ export default function News(props) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
+    marginBottom: 20,
     backgroundColor: '#fff',
     height: 300,
     width: 200,
@@ -36,7 +37,6 @@ const styles = StyleSheet.create({
     padding: 15,
     marginRight: 15,
     marginLeft: 15,
-    marginBottom: 5,
   },
   image: {
     width: 170,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 10,
+    paddingBottom: 5,
     width: '100%'
   },
   title: {
@@ -57,5 +57,6 @@ const styles = StyleSheet.create({
   description: {
     height: '100%',
     width: '100%',
+    textAlign: 'justify'
   }
 });

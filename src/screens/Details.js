@@ -1,20 +1,29 @@
 import React from 'react';
-import { Text, View, StyleSheet, ImageBackground } from 'react-native';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { Button, ListItem } from 'react-native-elements'
+import { Text, View, StyleSheet, ImageBackground, Dimensions, FlatList } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ListItem } from 'react-native-elements'
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 function header(tale) {
+  const windowHeight = Dimensions.get('window').height;
+
   return (
-    <View style={{ height: '100%' }}>
+    <View style={{ height: '100%', minHeight: windowHeight, backgroundColor: '#fff' }}>
       <ImageBackground source={{uri: 'https://picsum.photos/id/10/200'}}
         style={styles.image}>
 
-        <Text style={styles.title}> {tale.name} </Text>
+        <Text style={styles.title}>
+          {tale.name} 
+        </Text>
+        
         {/* <Text style={styles.info}> Autor: sit amet, consectetur </Text> */}
-        <Text style={styles.info}> Último lançamento: adipiscing elit  </Text>
+        
+        <Text style={styles.info}> 
+          Último lançamento: adipiscing elit 
+        </Text>
       </ImageBackground>
-
+    
       <View>
         <Text style={styles.descriptionTitle}>
           Descrição
@@ -30,29 +39,29 @@ function header(tale) {
           Capítulos
         </Text>
 
-        <TouchableOpacity onPress={() => {}}
+        {/* <TouchableOpacity onPress={() => {}}
           style={{ paddingTop: 10 }}>
           <Feather name='plus'
             size={24} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
 }
 
 export default function Details(routes) {
+  const navigation = useNavigation();
   const tale = routes.route.params;
-
+  
   return (
     <FlatList data={tale.chapters}
-    renderItem={({ item }) => (
-      // <Text style={styles.chapters}>
-      //   {item.name}
-      // </Text>
-      <ListItem key={item.key}
-        name={item.name} />
-    )} 
-    ListHeaderComponent={header(tale)} />
+      keyExtractor={item => item.key}
+      renderItem={({ item }) => (
+        <TouchableOpacity onPress={() => navigation.navigate('Chapter', item)}>
+          <Text> Capítulo {item.key}: {item.name} </Text>
+        </TouchableOpacity>
+      )}
+      ListHeaderComponent={header(tale)} />
   );
 }
 
@@ -67,29 +76,37 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     color: '#fff',
-    textAlign: 'justify'
+    textAlign: 'justify',
+    marginLeft: 10,
+    marginRight: 10,
   },
   info: {
-    fontSize: 14,
+    fontSize: 15,
     color: '#fff',
-    marginLeft: 5
+    marginLeft: 10,
   },
   descriptionTitle: {
-    width: '80%',
+    width: '86%',
     fontSize: 20,
     marginTop: 10,
+    marginLeft: 10,
     marginBottom: 10,
     marginRight: 10,
   },
   description: {
-    fontSize: 14,
+    fontSize: 16,
     marginLeft: 10,
     marginRight: 10,
+    textAlign: 'justify',
   },
   chapters: {
     width: '100%',
     flexDirection: 'row',
-    marginLeft: 10,
     marginRight: 10,
   },
+  teste: {
+    color: '#fff',
+    width: 50,
+    height: 10,
+  }
 });

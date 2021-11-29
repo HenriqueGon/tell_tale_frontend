@@ -6,6 +6,7 @@ import { TouchableOpacity } from 'react-native';
 
 import Home from './screens/Home';
 import Details from './screens/Details';
+import Chapter from './screens/Chapter';
 import Login from './screens/Login';
 
 const Stack = createNativeStackNavigator();
@@ -18,12 +19,12 @@ function Routes() {
           component={Home} 
           options={({ navigation }) => ({
             title: '',
-            headerRight: () => (
-              <TouchableOpacity onPress={() => {}}>
-                <Feather name='plus'
-                  size={24} />
-              </TouchableOpacity>
-            ),
+            // headerRight: () => (
+            //   <TouchableOpacity onPress={() => {}}>
+            //     <Feather name='plus'
+            //       size={24} />
+            //   </TouchableOpacity>
+            // ),
           })} />
 
         {/* <Stack.Screen name='Login'
@@ -42,6 +43,18 @@ function Routes() {
           component={Details}
           options={{
             title: 'Detalhes',
+            // headerRight: () => (
+            //   <TouchableOpacity>
+            //     <Feather name=''
+            //       size={24} />
+            //   </TouchableOpacity>
+            // )
+          }} />
+
+        <Stack.Screen name='Chapter'
+          component={Chapter}
+          options={{
+            title: '',
             // headerRight: () => (
             //   <TouchableOpacity>
             //     <Feather name=''
