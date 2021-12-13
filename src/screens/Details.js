@@ -6,10 +6,8 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 function header(tale) {
-  const windowHeight = Dimensions.get('window').height;
-
   return (
-    <View style={{ height: '100%', minHeight: windowHeight, backgroundColor: '#fff' }}>
+    <View style={styles.container}>
       <ImageBackground source={{uri: 'https://picsum.photos/id/10/200'}}
         style={styles.image}>
 
@@ -55,17 +53,24 @@ export default function Details(routes) {
   
   return (
     <FlatList data={tale.chapters}
+      ListHeaderComponent={header(tale)}
       keyExtractor={item => item.key}
       renderItem={({ item }) => (
         <TouchableOpacity onPress={() => navigation.navigate('Chapter', item)}>
-          <Text> Capítulo {item.key}: {item.name} </Text>
+          <Text style={styles.chapterTitle}> 
+            Capítulo {item.key}: {item.name} 
+          </Text>
         </TouchableOpacity>
       )}
-      ListHeaderComponent={header(tale)} />
+      style={{ backgroundColor: '#fff' }} />
   );
 }
 
 const styles = StyleSheet.create({
+  container: { 
+    flex: 1,  
+    backgroundColor: '#fff' 
+  },
   image: {
     width: '100%',
     height: 350,
@@ -104,9 +109,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginRight: 10,
   },
-  teste: {
-    color: '#fff',
-    width: 50,
-    height: 10,
+  chapterTitle: {
+    fontSize: 16,
+    marginLeft: 10,
+    paddingBottom: 10,
   }
 });

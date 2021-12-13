@@ -19,12 +19,12 @@ function Routes() {
           component={Home} 
           options={({ navigation }) => ({
             title: '',
-            // headerRight: () => (
-            //   <TouchableOpacity onPress={() => {}}>
-            //     <Feather name='plus'
-            //       size={24} />
-            //   </TouchableOpacity>
-            // ),
+            headerRight: () => (
+              <TouchableOpacity onPress={() => {}}>
+                <Feather name='plus'
+                  size={24} />
+              </TouchableOpacity>
+            ),
           })} />
 
         {/* <Stack.Screen name='Login'

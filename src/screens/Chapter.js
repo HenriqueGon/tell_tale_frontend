@@ -38,8 +38,9 @@ export default function Chapter() {
 const styles = StyleSheet.create({
   title: {
     fontSize: 24,
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: 10,
+    marginLeft: 10,
   },
   content: {
     marginLeft: 10,
