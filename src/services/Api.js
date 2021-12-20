@@ -15,7 +15,7 @@ class Api {
 
   static async post(route, data) {
     try {
-      await axios.post(`${API_URL}/${route}`, data) 
+      await axios.post(`${API_URL}/${route}`, data); 
     } catch (error) {
       console.log(error);
     }

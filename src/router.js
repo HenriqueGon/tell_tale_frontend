@@ -8,6 +8,8 @@ import Home from './screens/Home';
 import Details from './screens/Details';
 import Chapter from './screens/Chapter';
 import Login from './screens/Login';
+import FormTale from './screens/FormTale';
+import FormChapter from './screens/FormChapter';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +22,7 @@ function Routes() {
           options={({ navigation }) => ({
             title: '',
             headerRight: () => (
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => navigation.navigate('FormTale')}>
                 <Feather name='plus'
                   size={24} />
               </TouchableOpacity>
@@ -55,6 +57,30 @@ function Routes() {
           component={Chapter}
           options={{
             title: '',
+            // headerRight: () => (
+            //   <TouchableOpacity>
+            //     <Feather name=''
+            //       size={24} />
+            //   </TouchableOpacity>
+            // )
+          }} />
+
+        <Stack.Screen name='FormTale'
+          component={FormTale}
+          options={{
+            title: 'Cadastro de Contos',
+            // headerRight: () => (
+            //   <TouchableOpacity>
+            //     <Feather name=''
+            //       size={24} />
+            //   </TouchableOpacity>
+            // )
+          }} />
+
+        <Stack.Screen name='FormChapter'
+          component={FormChapter}
+          options={{
+            title: 'Cadastro de Capítulos',
             // headerRight: () => (
             //   <TouchableOpacity>
             //     <Feather name=''
