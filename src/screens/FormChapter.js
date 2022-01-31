@@ -1,29 +1,35 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, TextInput } from 'react-native';
+import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function FormChapter() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.label}>
-        Título:
-      </Text>
+    <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}
+        style={{ backgroundColor: '#fff' }}>
+        <Text style={styles.label}>
+          Título:
+        </Text>
 
-      <TextInput value={title}
-        onChangeText={setTitle}
-        style={styles.input} />
+        <TextInput value={title}
+          onChangeText={setTitle}
+          placeholder='Digite o título do capítulo'
+          style={styles.input} />
 
-      <Text style={styles.label}>
-        Conteúdo:
-      </Text>
+        <Text style={styles.label}>
+          Conteúdo:
+        </Text>
 
-      <TextInput value={content}
-        onChangeText={setContent}
-        multiline={true}
-        style={styles.inputContent} />
-    </SafeAreaView>
+        <TextInput value={content}
+          onChangeText={setContent}
+          placeholder='Digite o conteúdo do capítulo'
+          multiline={true}
+          style={styles.inputContent} />
+      </ScrollView>
+    </View>
   );
 };
 
@@ -34,18 +40,20 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    margin: 12,
-    borderWidth: 1.3,
-    borderRadius: 10,
-    padding: 10,
-  },
-  inputContent: {
-    height: 150,
-    margin: 12,
-    borderWidth: 1.3,
+    marginTop: 10,
+    marginBottom: 10,
+    borderBottomWidth: 1.5,
+    borderBottomColor: '#cecece',
+    fontSize: 17,
     borderRadius: 10,
     paddingLeft: 10,
-    paddingRight: 10,
+  },
+  inputContent: {
+    height: 300,
+    margin: 12,
+    borderBottomWidth: 1.5,
+    borderBottomColor: '#cecece',
+    fontSize: 17,
   },
   label: {
     fontSize: 17,

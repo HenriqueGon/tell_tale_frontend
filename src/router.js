@@ -45,12 +45,13 @@ function Routes() {
           component={Details}
           options={{
             title: 'Detalhes',
-            // headerRight: () => (
-            //   <TouchableOpacity>
-            //     <Feather name=''
-            //       size={24} />
-            //   </TouchableOpacity>
-            // )
+            headerRight: () => (
+              <TouchableOpacity onPress={() => {}}>
+                <Feather name='edit-2'
+                  style={{ color: '#ffff00' }}
+                  size={24} />
+              </TouchableOpacity>
+            )
           }} />
 
         <Stack.Screen name='Chapter'
@@ -69,25 +70,27 @@ function Routes() {
           component={FormTale}
           options={{
             title: 'Cadastro de Contos',
-            // headerRight: () => (
-            //   <TouchableOpacity>
-            //     <Feather name=''
-            //       size={24} />
-            //   </TouchableOpacity>
-            // )
+            headerRight: () => (
+              <TouchableOpacity>
+                <Feather name='check'
+                  size={24}
+                  style={{ color: '#2bff00' }} />
+              </TouchableOpacity>
+            )
           }} />
 
         <Stack.Screen name='FormChapter'
           component={FormChapter}
-          options={{
+          options={({ navigation }) => ({
             title: 'Cadastro de Capítulos',
-            // headerRight: () => (
-            //   <TouchableOpacity>
-            //     <Feather name=''
-            //       size={24} />
-            //   </TouchableOpacity>
-            // )
-          }} />
+            headerRight: () => (
+              <TouchableOpacity onPress={() => {}}>
+                <Feather name='check'
+                  size={24} 
+                  style={{ color: '#2bff00' }} />
+              </TouchableOpacity>
+            ),
+          })} />
       </Stack.Navigator>
     </NavigationContainer>
   );

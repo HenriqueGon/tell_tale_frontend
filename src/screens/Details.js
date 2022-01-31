@@ -1,56 +1,62 @@
-import React from 'react';
-import { Text, View, StyleSheet, ImageBackground, Dimensions, FlatList } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, StyleSheet, ImageBackground, FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { ListItem } from 'react-native-elements'
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 
-function header(tale) {
-  return (
-    <View style={styles.container}>
-      <ImageBackground source={{uri: 'https://picsum.photos/id/10/200'}}
-        style={styles.image}>
-
-        <Text style={styles.title}>
-          {tale.name} 
-        </Text>
-        
-        {/* <Text style={styles.info}> Autor: sit amet, consectetur </Text> */}
-        
-        <Text style={styles.info}> 
-          Último lançamento: adipiscing elit 
-        </Text>
-      </ImageBackground>
-    
-      <View>
-        <Text style={styles.descriptionTitle}>
-          Descrição
-        </Text>
-
-        <Text style={styles.description}>
-          {tale.description}
-        </Text>
-      </View>
-
-      <View style={styles.chapters}>
-        <Text style={styles.descriptionTitle}>
-          Capítulos
-        </Text>
-
-        {/* <TouchableOpacity onPress={() => {}}
-          style={{ paddingTop: 10 }}>
-          <Feather name='plus'
-            size={24} />
-        </TouchableOpacity> */}
-      </View>
-    </View>
-  );
-}
-
-export default function Details(routes) {
+const Details = (routes) => {
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
   const tale = routes.route.params;
   
+  useEffect(() => {
+    if (isFocused) {
+      console.log(isFocused);
+    }
+  }, [isFocused])
+
+  function header(tale) {
+    return (
+      <View style={styles.container}>
+        <ImageBackground source={{ uri: 'https://picsum.photos/id/10/200' }}
+          style={styles.image}>
+
+          <Text style={styles.title}>
+            {tale.name}
+          </Text>
+
+          {/* <Text style={styles.info}> Autor: sit amet, consectetur </Text> */}
+
+          {/* <Text style={styles.info}> 
+          Último lançamento: adipiscing elit 
+        </Text> */}
+        </ImageBackground>
+
+        <View>
+          <Text style={styles.descriptionTitle}>
+            Descrição
+          </Text>
+
+          <Text style={styles.description}>
+            {tale.description}
+          </Text>
+        </View>
+
+        <View style={styles.chapters}>
+          <Text style={styles.descriptionTitle}>
+            Capítulos
+          </Text>
+
+          <TouchableOpacity onPress={() => navigation.navigate('FormChapter')}
+            style={{ paddingTop: 10 }}>
+            <Feather name='plus'
+              size={24} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <FlatList data={tale.chapters}
       ListHeaderComponent={header(tale)}
@@ -110,8 +116,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   chapterTitle: {
-    fontSize: 16,
+    fontSize: 17,
     marginLeft: 10,
     paddingBottom: 10,
   }
 });
+
+export default Details;
