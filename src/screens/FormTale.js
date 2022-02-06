@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, TextInput, ImageBackground, View } from 'react-native';
+import { StyleSheet, Text, TextInput, ImageBackground, View, Button, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Api from '../services/Api';
 
-export default function FormTale() {
+export default function FormTale(tale) {
   const [name, setName] = useState('');
   const [urlImage, setUrlImage] = useState('');
   const [description, setDescription] = useState('');
@@ -49,6 +50,32 @@ export default function FormTale() {
           multiline={true}
           placeholder='Digite a descrição do conto'
           style={styles.inputDescription} />
+
+        <Button title='Salvar'
+          onPress={async () => {
+            if (name.length <= 0) {
+              return Alert.alert('O campo de nome deve ser preenchido!');
+            }
+
+            if (urlImage.length <= 0) {
+              return Alert.alert('O campo de url da imagem deve ser preenchido!');
+            }
+
+            const res = await Api.post('tales/save', {
+              name: name,
+              urlImage: urlImage,
+              description: description,
+            });
+
+            if (res.status === 201) {
+              Alert.alert(res.text);
+
+              setName('');
+              setUrlImage('');
+              setDescription('');
+            }
+          }} />
+        
       </ScrollView>
     </View>
   );

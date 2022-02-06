@@ -1,24 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, ImageBackground, FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 
+import Api from '../services/Api';
+
 const Details = (routes) => {
+  const [tale, setTale] = useState({});
+  const [chapters, setChapters] = useState([]);
+
   const isFocused = useIsFocused();
   const navigation = useNavigation();
-  const tale = routes.route.params;
+
+  const taleParams = routes.route.params;
   
-  useEffect(() => {
+  useEffect(async () => {
+    const tale = await Api.get(`tales/search/${taleParams.id}`);
+  
+    setTale(tale);
+  }, []);
+  
+  useEffect(async () => {
     if (isFocused) {
-      console.log(isFocused);
+      const data = await Api.get(`${taleParams.name}/chapters`);
+
+      setChapters(data);
     }
   }, [isFocused])
 
+  async function deleteChapter(item) {
+    const res = await Api.delete('chapters', item);
+
+    if (res.status === 200) {
+      Alert.alert(res.text);
+    }
+  }
+  
   function header(tale) {
+
     return (
       <View style={styles.container}>
-        <ImageBackground source={{ uri: 'https://picsum.photos/id/10/200' }}
+        <ImageBackground source={{ uri: tale.urlImage }}
           style={styles.image}>
 
           <Text style={styles.title}>
@@ -47,7 +70,7 @@ const Details = (routes) => {
             Capítulos
           </Text>
 
-          <TouchableOpacity onPress={() => navigation.navigate('FormChapter')}
+          <TouchableOpacity onPress={() => navigation.navigate('FormChapter', tale)}
             style={{ paddingTop: 10 }}>
             <Feather name='plus'
               size={24} />
@@ -58,13 +81,14 @@ const Details = (routes) => {
   }
 
   return (
-    <FlatList data={tale.chapters}
+    <FlatList data={chapters}
       ListHeaderComponent={header(tale)}
-      keyExtractor={item => item.key}
+      keyExtractor={item => item.id}
       renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate('Chapter', item)}>
+        <TouchableOpacity onPress={() => navigation.navigate('Chapter', item)}
+         onLongPress={() => deleteChapter(item)}>
           <Text style={styles.chapterTitle}> 
-            Capítulo {item.key}: {item.name} 
+            Capítulo {item.id}: {item.title} 
           </Text>
         </TouchableOpacity>
       )}

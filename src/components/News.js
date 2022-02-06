@@ -1,13 +1,23 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, Alert } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import Api from '../services/Api';
 
 export default function News(props) {
   const navigation = useNavigation();
 
+  async function deleteTale(item) {
+    const res = await Api.delete('tales', item);
+
+    if (res.status === 200) {
+      Alert.alert(res.text);
+    }
+  }
+
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Details', props.tale)}
+      onLongPress={() => deleteTale(props.tale)}
       style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}> 
@@ -15,7 +25,7 @@ export default function News(props) {
         </Text>
       </View>
 
-      <Image source={{uri: props.tale.image}}
+      <Image source={{uri: props.tale.urlImage}}
         style={styles.image} />
 
       <Text style={styles.description}>

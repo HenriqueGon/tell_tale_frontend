@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { Button } from 'react-native';
+import { Alert } from 'react-native';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import Api from '../services/Api';
 
-export default function FormChapter() {
+export default function FormChapter(routes) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  
+  const tale = routes.route.params;
 
   return (
     <View style={styles.container}>
@@ -28,6 +33,26 @@ export default function FormChapter() {
           placeholder='Digite o conteúdo do capítulo'
           multiline={true}
           style={styles.inputContent} />
+
+        <Button title='Salvar'
+          onPress={async () => {
+            if (title.length <= 0) {
+              return Alert.alert('O campo de título deve ser preenchido!');
+            }
+
+            const res = await Api.post('chapters/save', {
+              title: title,
+              content: content,
+              tale: tale,
+            });
+
+            if (res.status === 201) {
+              Alert.alert(res.text);
+
+              setTitle('');
+              setContent('');
+            }
+          }} />
       </ScrollView>
     </View>
   );

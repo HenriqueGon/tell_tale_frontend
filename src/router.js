@@ -43,16 +43,16 @@ function Routes() {
 
         <Stack.Screen name='Details'
           component={Details}
-          options={{
+          options={({ navigation }) => ({
             title: 'Detalhes',
-            headerRight: () => (
-              <TouchableOpacity onPress={() => {}}>
-                <Feather name='edit-2'
-                  style={{ color: '#ffff00' }}
-                  size={24} />
-              </TouchableOpacity>
-            )
-          }} />
+            // headerRight: () => (
+            //   <TouchableOpacity onPress={() => {}}>
+            //     <Feather name='edit-2'
+            //       style={{ color: '#ffff00' }}
+            //       size={24} />
+            //   </TouchableOpacity>
+            // ),
+          })} />
 
         <Stack.Screen name='Chapter'
           component={Chapter}
@@ -68,28 +68,28 @@ function Routes() {
 
         <Stack.Screen name='FormTale'
           component={FormTale}
-          options={{
+          options={({ navigation }) => ({
             title: 'Cadastro de Contos',
-            headerRight: () => (
-              <TouchableOpacity>
-                <Feather name='check'
-                  size={24}
-                  style={{ color: '#2bff00' }} />
-              </TouchableOpacity>
-            )
-          }} />
+            // headerRight: () => (
+              // <TouchableOpacity onPress={() => {}}>
+              //   <Feather name='check'
+              //     size={24}
+              //     style={{ color: '#2bff00' }} />
+              // </TouchableOpacity>
+            // ),
+          })} />
 
         <Stack.Screen name='FormChapter'
           component={FormChapter}
           options={({ navigation }) => ({
             title: 'Cadastro de Capítulos',
-            headerRight: () => (
-              <TouchableOpacity onPress={() => {}}>
-                <Feather name='check'
-                  size={24} 
-                  style={{ color: '#2bff00' }} />
-              </TouchableOpacity>
-            ),
+            // headerRight: () => (
+            //   <TouchableOpacity onPress={() => {}}>
+            //     <Feather name='check'
+            //       size={24} 
+            //       style={{ color: '#2bff00' }} />
+            //   </TouchableOpacity>
+            // ),
           })} />
       </Stack.Navigator>
     </NavigationContainer>

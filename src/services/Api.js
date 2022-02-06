@@ -15,7 +15,12 @@ class Api {
 
   static async post(route, data) {
     try {
-      await axios.post(`${API_URL}/${route}`, data); 
+      const response = await axios.post(`${API_URL}/${route}`, data); 
+
+      return {
+        status: response.status,
+        text: 'Criado com sucesso!',
+      }
     } catch (error) {
       console.log(error);
     }
@@ -23,7 +28,12 @@ class Api {
 
   static async put(route, data) {
     try {
-      await axios.put(`${API_URL}/${route}`, data);
+      const response = await axios.put(`${API_URL}/${route}`, data);
+
+      return {
+        status: response.status,
+        text: 'Atualizado com sucesso!',
+      }
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +41,12 @@ class Api {
 
   static async delete(route, data) {
     try {
-      await axios.delete(`${API_URL}/${route}`, data);
+      const response = await axios.delete(`${API_URL}/${route}`, data);
+
+      return {
+        status: response.status,
+        text: 'Deletado com sucesso!',
+      }
     } catch (error) {
       console.log(error);
     }
